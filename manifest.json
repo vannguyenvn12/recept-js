@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "USCIS Auto Fetch",
+  "version": "1.1",
+  "description": "Fetch USCIS status using receipt number",
+  "permissions": ["scripting", "activeTab"],
+  "host_permissions": ["https://egov.uscis.gov/*"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Check USCIS"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["xlsx.full.min.js"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
