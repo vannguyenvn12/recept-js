@@ -2,7 +2,6 @@ let socket = null;
 
 document.getElementById('submitBtn').addEventListener('click', async () => {
   const receiptInput = document.getElementById('receiptInput').value.trim();
-
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
   await chrome.scripting.executeScript({
@@ -16,6 +15,7 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
       let allData = '';
 
       try {
+        console.log('Bat dau mo websocket', window.socket);
         if (!window.socket || window.socket.readyState === WebSocket.CLOSED) {
           window.socket = new WebSocket('ws://localhost:8081');
 
