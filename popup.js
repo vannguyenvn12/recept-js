@@ -14,10 +14,20 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
     func: async (receiptNumbers) => {
       let allData = '';
 
+      // ⏰ Reload mỗi 1 tiếng
+      setTimeout(() => {
+        if (window.socket && window.socket.readyState === WebSocket.OPEN) {
+          window.socket.send('doi_chut');
+        } else {
+          console.warn('⚠️ WebSocket chưa sẵn sàng, không gửi được doi_chut');
+        }
+        location.reload();
+      }, 60 * 60 * 1000);
+
       try {
         console.log('Bat dau mo websocket', window.socket);
         if (!window.socket || window.socket.readyState === WebSocket.CLOSED) {
-          window.socket = new WebSocket('ws://localhost:8081');
+          window.socket = new WebSocket('ws://localhost:8082');
 
           window.socket.onopen = function () {
             console.log('WebSocket connected!');
